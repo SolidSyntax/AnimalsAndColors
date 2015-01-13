@@ -1,0 +1,244 @@
+/*
+Copyright (c) 2015 "Solid Syntax" <http://www.SolidSyntax.net>
+Browser game <https://github.com/SolidSyntax/AnimalsAndColors>
+
+This file is part of AnimalsAndColors.
+
+AnimalsAndColors is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+.titleFont {
+    font-family: 'Architects Daughter', cursive;
+    font-weight: bolder;
+    font-size: 5vh;
+}
+
+.font {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.pink {
+    color: #fe8282;
+}
+
+.grey {
+    color: #7f7f7f;
+}
+
+.blue {
+    color: #37abc8;
+}
+
+.yellow {
+    color: #ffcc00;
+}
+
+.farm {
+    height: 70vh;
+    width: 100vw;
+    display: block;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    background: url("resources/FarmNoRatio.svg");
+    background-size: 100% 100%;
+}
+
+.leftAnimal {
+    display: inline-block;
+    margin-left: 20%;
+    width: 10%;
+    height: 100%;
+    -webkit-animation: swing 4s 1s;
+    -moz-animation: swing 4s 1s;
+    -o-animation: swing 4s 1s;
+    animation: swing 4s 1s;
+}
+
+.leftAnimal-add-active {
+    -webkit-animation: bounceInLeft 2s;
+    -moz-animation: bounceInLeft 2s;
+    -o-animation: bounceInLeft 2s;
+    animation: bounceInLeft 2s;
+}
+
+.rightAnimal {
+    display: inline-block;
+    margin-left: 30%;
+    width: 10%;
+    height: 100%;
+    -webkit-animation: bounce 1s 2s;
+    -moz-animation: bounce 1s 2s;
+    -o-animation: bounce 1s 2s;
+    animation: bounce 1s 2;
+}
+
+.rightAnimal-add-active {
+    -webkit-animation: bounceInRight 2s;
+    -moz-animation: bounceInRight 2s;
+    -o-animation: bounceInRight 2s;
+    animation: bounceInRight 2s;
+}
+
+.selectAnimalBar {
+    height: 15vh;
+}
+
+.selectAnimal {
+    display: inline-block;
+    transition: all .2s ease-in-out;
+    height: 100%;
+    width: 15vmin;
+}
+
+.titleAnimal {
+    display: inline-block;
+    margin-left: 6%;
+    margin-right: 2%;
+    width: 10%;
+    height: 100%;
+    -webkit-animation: wobble 5s infinite;
+    -moz-animation: wobble 5s infinite;
+    -o-animation: wobble 5s infinite;
+    animation: wobble 5s infinite;
+
+}
+
+.selectAnimal:hover {
+    transform: scale(1.5);
+}
+
+.pigBlue {
+    background: url("resources/AnimalPigBlue.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.pigYellow {
+    background: url("resources/AnimalPigYellow.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.pigGrey {
+    background: url("resources/AnimalPigGrey.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.pigWhite {
+    background: url("resources/AnimalPigWhite.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.pigPink {
+    background: url("resources/AnimalPigPink.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.elephantBlue {
+    background: url("resources/AnimalElephantBlue.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.elephantYellow {
+    background: url("resources/AnimalElephantYellow.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.elephantGrey {
+    background: url("resources/AnimalElephantGrey.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.elephantWhite {
+    background: url("resources/AnimalElephantWhite.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.elephantPink {
+    background: url("resources/AnimalElephantPink.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.giraffeBlue {
+    background: url("resources/AnimalGiraffeBlue.svg") no-repeat center;
+    background-size: 50%, 50%;
+}
+
+.giraffeYellow {
+    background: url("resources/AnimalGiraffeYellow.svg") no-repeat center;
+    background-size: 50%, 50%;
+}
+
+.giraffeGrey {
+    background: url("resources/AnimalGiraffeGrey.svg") no-repeat center;
+    background-size: 50%, 50%;
+}
+
+.giraffeWhite {
+    background: url("resources/AnimalGiraffeWhite.svg") no-repeat center;
+    background-size: 50%, 50%;
+}
+
+.giraffePink {
+    background: url("resources/AnimalGiraffePink.svg") no-repeat center;
+    background-size: 50%, 50%;
+}
+
+.owlBlue {
+    background: url("resources/AnimalOwlBlue.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.owlYellow {
+    background: url("resources/AnimalOwlYellow.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.owlGrey {
+    background: url("resources/AnimalOwlGrey.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.owlWhite {
+    background: url("resources/AnimalOwlWhite.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.owlPink {
+    background: url("resources/AnimalOwlPink.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.sheepBlue {
+    background: url("resources/AnimalSheepBlue.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.sheepYellow {
+    background: url("resources/AnimalSheepYellow.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.sheepGrey {
+    background: url("resources/AnimalSheepGrey.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.sheepWhite {
+    background: url("resources/AnimalSheepWhite.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
+
+.sheepPink {
+    background: url("resources/AnimalSheepPink.svg") no-repeat center;
+    background-size: 100%, 100%;
+}
