@@ -75,21 +75,17 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource'])
         }
 
         var selectRandomQuestions = function (allQuestions, numberOfQuestions) {
-            //Calculate how many questions to remove
-            var nrOfQuestionsToRemove = allQuestions.length - numberOfQuestions;
+            //Create an array to store the results
+            var result = [];
 
-            //Create a shallow copy of the original array
-            var result = allQuestions.slice();
+            //Add questions until the result-array contains the requested number
+            while (result.length < numberOfQuestions) {
 
-            //While there are still elements to remove, remove on random
-            while (nrOfQuestionsToRemove > 0) {
+                //select a random index
+                var randomElementIndex = Math.floor(Math.random() * allQuestions.length);
 
-                //Remove one element at a random location
-                result.splice(randomElementIndex, 1);
-                var randomElementIndex = Math.floor(Math.random() * result.length);
-
-                //One less element to remove
-                nrOfQuestionsToRemove--;
+                //Add the question to the result
+                result.push(allQuestions[randomElementIndex]);
             }
 
             return result;
