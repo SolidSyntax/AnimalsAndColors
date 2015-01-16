@@ -75,18 +75,15 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource'])
         }
 
         var selectRandomQuestions = function (allQuestions, numberOfQuestions) {
-            //Create an array to store the results
-            var result = [];
+            //Use lodash to add 'n' questions to a new array
+            var result = _.times(numberOfQuestions, function (n) {
 
-            //Add questions until the result-array contains the requested number
-            while (result.length < numberOfQuestions) {
-
-                //select a random index
+                //Select a random index from the complete question list
                 var randomElementIndex = Math.floor(Math.random() * allQuestions.length);
 
-                //Add the question to the result
-                result.push(allQuestions[randomElementIndex]);
-            }
+                //Return the question at the selected index
+                return allQuestions[randomElementIndex];
+            })
 
             return result;
         }

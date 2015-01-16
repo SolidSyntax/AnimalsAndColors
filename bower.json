@@ -10,6 +10,7 @@
     "angular-resource": "latest",
     "angular-animate": "latest",
     "animate-css": "latest",
-    "angular-material": "latest"
+    "angular-material": "latest",
+    "lodash":"latest"
   }
 }
