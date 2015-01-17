@@ -101,6 +101,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     width: 15vmin;
 }
 
+.answerAnimal{
+    display: inline-block;
+    margin-left: 10%;
+    height:25vh;
+    width: 25vmin;
+    -webkit-animation: tada 2s;
+    -moz-animation: tada 2s;
+    -o-animation: tada 2s;
+    animation: tada 2s;
+}
+
 .titleAnimal {
     display: inline-block;
     margin-left: 6%;
