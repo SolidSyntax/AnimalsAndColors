@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource'])
+angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial'])
     // Add route configuration for module
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
@@ -31,7 +31,7 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource'])
     }])
 
     // Add controllers
-    .controller('GameCtrl', ['$scope', '$resource', '$timeout', function ($scope, $resource,$timeout) {
+    .controller('GameCtrl', ['$scope', '$resource', '$timeout', '$mdDialog', function ($scope, $resource, $timeout, $mdDialog) {
         // Scope variables
         $scope.classRightAnimal = "";
         $scope.classLeftAnimal = "";
@@ -47,12 +47,12 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource'])
             $scope.classRightAnimal = "";
             $scope.classLeftAnimal = "";
 
-            if(animal === currentQuestion.answer.type){
-                alert("Correct!");
-            }else{
-                alert("Wrong!")
+            if (animal === currentQuestion.answer.type) {
+                showDialogCorrectAnswer();
+            } else {
+                showDialogWrongAnswer();
             }
-            $timeout(selectNextQuestion,100);
+
         }
 
 
@@ -88,7 +88,7 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource'])
             return result;
         }
 
-        var selectNextQuestion = function(){
+        var selectNextQuestion = function () {
             //Select from array
             currentQuestion = selectedQuestions[questionIndex];
 
@@ -100,9 +100,30 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource'])
             questionIndex++;
         }
 
-        var buildClassStringForAnimal = function (animal){
+        var buildClassStringForAnimal = function (animal) {
             return animal.type + animal.color.charAt(0).toUpperCase() + animal.color.substr(1).toLowerCase();
         }
+
+        var showDialogCorrectAnswer = function () {
+            $mdDialog.show({
+                templateUrl: 'game/answerDialogCorrect.tmpl.html',
+                controller: 'AnswerDialogCtrl',
+                locals: {answerClass: buildClassStringForAnimal(currentQuestion.answer)}
+            }).finally(function () {
+                $timeout(selectNextQuestion, 100);
+            });
+        }
+
+        var showDialogWrongAnswer = function () {
+            $mdDialog.show({
+                templateUrl: 'game/answerDialogWrong.tmpl.html',
+                controller: 'AnswerDialogCtrl',
+                locals: {answerClass: buildClassStringForAnimal(currentQuestion.answer)}
+            }).finally(function () {
+                $timeout(selectNextQuestion, 100);
+            });
+        }
+
 
 
         //Initialize
@@ -117,4 +138,13 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource'])
         });
 
 
+    }])
+    .controller('AnswerDialogCtrl', ['$scope', '$mdDialog', 'answerClass', function ($scope, $mdDialog, answerClass) {
+        // Assigned from construction <code>locals</code> options...
+        $scope.answerClass = answerClass;
+
+        $scope.closeDialog = function () {
+            $mdDialog.hide();
+        };
     }]);
+
