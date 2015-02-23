@@ -23,6 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     font-weight: bolder;
     font-size: 5vh;
 }
+.score{
+    margin-left: 5vw;
+}
 
 .font {
     font-family: 'Open Sans', sans-serif;
@@ -45,7 +48,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 }
 
 .farm {
-    height: 70vh;
+    height: 65vh;
     width: 100vw;
     display: block;
     margin-top: 5vh;
