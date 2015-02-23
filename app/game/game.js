@@ -31,7 +31,8 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
     }])
 
     // Add controllers
-    .controller('GameCtrl', ['$scope', '$resource', '$timeout', '$mdDialog', function ($scope, $resource, $timeout, $mdDialog) {
+    .controller('GameCtrl', ['$scope', '$resource', '$timeout', '$mdDialog', '$location',
+        function ($scope, $resource, $timeout, $mdDialog, $location) {
         // Scope variables
         $scope.classRightAnimal = "";
         $scope.classLeftAnimal = "";
@@ -95,6 +96,11 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
         }
 
         var selectNextQuestion = function () {
+            //Display final score if there are no more questions
+            if($scope.questionIndex >= $scope.numberOfQuestions){
+                showDialogFinalScore();
+            }
+
             //Select from array
             currentQuestion = selectedQuestions[$scope.questionIndex];
 
@@ -130,6 +136,15 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
             });
         }
 
+        var showDialogFinalScore = function () {
+            $mdDialog.show({
+                templateUrl: 'game/finalScoreDialog.tmpl.html',
+                controller: 'FinalScoreDialogCtrl',
+                locals: {score: $scope.score}
+            }).finally(function () {
+                $location.path('/')
+            });
+        }
 
 
         //Initialize
@@ -148,6 +163,13 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
     .controller('AnswerDialogCtrl', ['$scope', '$mdDialog', 'answerClass', function ($scope, $mdDialog, answerClass) {
         // Assigned from construction <code>locals</code> options...
         $scope.answerClass = answerClass;
+
+        $scope.closeDialog = function () {
+            $mdDialog.hide();
+        };
+    }])
+    .controller('FinalScoreDialogCtrl', ['$scope', '$mdDialog', 'score', function ($scope, $mdDialog, score) {
+        $scope.score = score;
 
         $scope.closeDialog = function () {
             $mdDialog.hide();
