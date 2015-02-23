@@ -35,12 +35,14 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
         // Scope variables
         $scope.classRightAnimal = "";
         $scope.classLeftAnimal = "";
+        $scope.score = 0;
+        $scope.questionIndex = 0;
+        $scope.numberOfQuestions = 10;
 
         // variables
         var allQuestions;
         var selectedQuestions;
         var currentQuestion;
-        var questionIndex;
 
         //Scope functions
         $scope.actionSelectAnswer = function (animal) {
@@ -48,6 +50,7 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
             $scope.classLeftAnimal = "";
 
             if (animal === currentQuestion.answer.type) {
+                $scope.score++;
                 showDialogCorrectAnswer();
             } else {
                 showDialogWrongAnswer();
@@ -63,10 +66,13 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
             $scope.classLeftAnimal = "";
 
             //Select random questions
-            selectedQuestions = selectRandomQuestions(allQuestions, 10);
+            selectedQuestions = selectRandomQuestions(allQuestions, $scope.numberOfQuestions);
 
             //Reset the questionIndex
-            questionIndex = 0;
+            $scope.questionIndex = 0;
+
+            //Reset the score
+            $scope.score = 0;
 
             //Select the next question
             selectNextQuestion();
@@ -90,14 +96,14 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
 
         var selectNextQuestion = function () {
             //Select from array
-            currentQuestion = selectedQuestions[questionIndex];
+            currentQuestion = selectedQuestions[$scope.questionIndex];
 
             //Set the animals
             $scope.classLeftAnimal = "leftAnimal " + buildClassStringForAnimal(currentQuestion.leftAnimal);
             $scope.classRightAnimal = "rightAnimal " + buildClassStringForAnimal(currentQuestion.rightAnimal);
 
             //Increment the questionIndex
-            questionIndex++;
+            $scope.questionIndex++;
         }
 
         var buildClassStringForAnimal = function (animal) {
