@@ -1,0 +1,99 @@
+<!--
+Copyright (c) 2015 "Solid Syntax" <http://www.SolidSyntax.net>
+Browser game <https://github.com/SolidSyntax/AnimalsAndColors>
+
+This file is part of AnimalsAndColors.
+
+AnimalsAndColors is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<div layout="row" layout-align="center" class="titleFont">
+    <span class="howToMargin pink lookAtMe">Welkom op de boerderij !</span>
+</div>
+
+<p layout="row" layout-align="center center" class="howToMargin titleSmallerFont grey">Deze 5 diertjes wonen op de
+    boerderij:</p>
+
+<div layout="column" layout-align="center center" class="selectAnimalBar howToMargin">
+    <div class="howToAnimal pigPink"></div>
+    <div class="titleSmallerFont pink">Het roze varken</div>
+</div>
+
+<div layout="column" layout-align="center center" class="selectAnimalBar howToMargin">
+    <div class="howToAnimal elephantGrey"></div>
+    <div class="titleSmallerFont grey">De grijze olifant</div>
+</div>
+
+<div layout="column" layout-align="center center" class="selectAnimalBar howToMargin">
+    <div class="howToAnimal giraffeYellow"></div>
+    <div class="titleSmallerFont yellow">De gele giraf</div>
+</div>
+
+<div layout="column" layout-align="center center" class="selectAnimalBar howToMargin">
+    <div class="howToAnimal owlBlue"></div>
+    <div class="titleSmallerFont blue">De blauwe uil</div>
+</div>
+
+<div layout="column" layout-align="center center" class="selectAnimalBar howToMargin">
+    <div class="howToAnimal sheepWhite"></div>
+    <div class="titleSmallerFont">Het witte schaap</div>
+</div>
+
+<p layout="row" layout-align="center center" class="howToMargin titleSmallerFont grey">Kan jij aanduiden welk diertje
+    zich het beste kon verstoppen ?</p>
+
+<div layout="row" class="farm">
+    <div flex="50" class="leftAnimal giraffeBlue"></div>
+    <div flex="50" class="rightAnimal sheepPink"></div>
+</div>
+
+<p layout="row" layout-align="start center" class="howToMargin titleSmallerFont blue">In het bovenstaande voorbeeld
+    herkennen we duidelijk de giraf en het schaap</p>
+
+<div layout="row" layout-align="space-around center" class="selectAnimalBar">
+    <div class="selectAnimal pigPink"></div>
+    <div class="selectAnimal elephantGrey"></div>
+    <div class="selectAnimal giraffeYellow wrongAnswerFont">X</div>
+    <div class="selectAnimal owlBlue"></div>
+    <div class="selectAnimal sheepWhite wrongAnswerFont">X</div>
+</div>
+
+<p layout="row" layout-align="start center" class="howToMargin titleSmallerFont pink">Ze hebben echter niet hun normale
+    kleur !</p>
+
+<p layout="row" layout-align="start center" class="howToMargin titleSmallerFont yellow">De giraf is blauw zoals de uil.
+    En het schaap is roos zoals het varken</p>
+
+<div layout="row" layout-align="space-around center" class="selectAnimalBar">
+    <div class="selectAnimal pigPink wrongAnswerFont">X</div>
+    <div class="selectAnimal elephantGrey"></div>
+    <div class="selectAnimal giraffeYellow wrongAnswerFont">X</div>
+    <div class="selectAnimal owlBlue wrongAnswerFont">X</div>
+    <div class="selectAnimal sheepWhite wrongAnswerFont">X</div>
+</div>
+
+
+<p layout="row" layout-align="start center" class="howToMargin titleSmallerFont grey">Er is dus maar één diertje echt
+    goed verstopt</p>
+
+<div layout="column" layout-align="center center" class="selectAnimalBar howToMargin">
+    <div class="howToAnimal elephantGrey"></div>
+    <div class="titleSmallerFont grey">De grijze olifant</div>
+</div>
+
+
+<div layout="row" layout-align="space-around center" class="font howToMargin">
+    <md-button class="md-raised blue" href="#/">Terug</md-button>
+</div>
+
