@@ -23,6 +23,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     font-weight: bolder;
     font-size: 5vh;
 }
+
+.titleSmallerFont {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 4vh;
+}
+
 .score{
     margin-left: 5vw;
 }
@@ -48,13 +54,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 }
 
 .farm {
-    height: 65vh;
+    height: 60vh;
     width: 100vw;
     display: block;
     margin-top: 5vh;
     margin-bottom: 5vh;
     background: url("resources/FarmNoRatio.svg");
     background-size: 100% 100%;
+}
+
+.howToMargin{
+    margin-top: 5vh;
+    margin-left: 5vw;
+}
+
+.wrongAnswerFont{
+    color:#ff0000;
+    font-weight: bold;
+    font-size: 15vmin;
+    text-align: center;
 }
 
 .leftAnimal {
@@ -94,7 +112,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 }
 
 .selectAnimalBar {
-    height: 15vh;
+    height: 20vh;
 }
 
 .selectAnimal {
@@ -104,11 +122,36 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     width: 15vmin;
 }
 
+.selectAnimal:hover {
+    transform: scale(1.5);
+}
+
+
+.howToAnimal {
+    display: inline-block;
+    height: 100%;
+    width: 15vmin;
+}
+
+.howToAnimal:hover{
+    -webkit-animation: flash 2s;
+    -moz-animation: flash 2s;
+    -o-animation: flash 2s;
+    animation: flash 2s;
+}
+
 .answerAnimal{
     display: inline-block;
     margin-left: 10%;
     height:25vh;
     width: 25vmin;
+    -webkit-animation: tada 2s;
+    -moz-animation: tada 2s;
+    -o-animation: tada 2s;
+    animation: tada 2s;
+}
+
+.lookAtMe{
     -webkit-animation: tada 2s;
     -moz-animation: tada 2s;
     -o-animation: tada 2s;
@@ -126,10 +169,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     -o-animation: wobble 5s infinite;
     animation: wobble 5s infinite;
 
-}
-
-.selectAnimal:hover {
-    transform: scale(1.5);
 }
 
 .pigBlue {

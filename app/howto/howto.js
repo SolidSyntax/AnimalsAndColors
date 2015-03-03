@@ -20,18 +20,20 @@
 
 'use strict';
 
-angular.module('AnimalsAndColorsApp', [
-    'ngRoute',
-    'ngAnimate',
-    'ngMaterial',
-    'AnimalsAndColorsApp.game',
-    'AnimalsAndColorsApp.title',
-    'AnimalsAndColorsApp.howto',
-
-])
-    // Add default route configuration
+angular.module('AnimalsAndColorsApp.howto', ['ngRoute'])
+    // Add route configuration for module
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
-            .otherwise({redirectTo: '/title'});
+            .when('/howto', {
+                templateUrl: 'howto/howto.html',
+                controller: 'HowToCtrl'
+            });
     }])
-;
+
+    // Add controllers
+    .controller('HowToCtrl', [
+        function () {
+
+
+    }]);
+
