@@ -25,7 +25,7 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/practice', {
-                templateUrl: '/practice.html',
+                templateUrl: 'practice/practice.html',
                 controller: 'PracticeCtrl'
             });
     }])
@@ -125,7 +125,7 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
 
         var showDialogCorrectAnswer = function () {
             $mdDialog.show({
-                templateUrl: '/answerDialogCorrect.tmpl.html',
+                templateUrl: 'practice/answerDialogCorrect.tmpl.html',
                 controller: 'AnswerDialogCtrl',
                 locals: {answerClass: buildClassStringForAnimal(currentQuestion.answer)}
             }).finally(function () {
@@ -135,7 +135,7 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
 
         var showDialogWrongAnswer = function () {
             $mdDialog.show({
-                templateUrl: '/answerDialogWrong.tmpl.html',
+                templateUrl: 'practice/answerDialogWrong.tmpl.html',
                 controller: 'AnswerDialogCtrl',
                 locals: {answerClass: buildClassStringForAnimal(currentQuestion.answer)}
             }).finally(function () {
@@ -145,7 +145,7 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
 
         var showDialogFinalScore = function () {
             $mdDialog.show({
-                templateUrl: '/finalScoreDialog.tmpl.html',
+                templateUrl: 'practice/finalScoreDialog.tmpl.html',
                 controller: 'FinalScoreDialogCtrl',
                 locals: {score: $scope.score}
             }).finally(function () {
