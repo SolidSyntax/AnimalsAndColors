@@ -47,6 +47,11 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
 
         //Scope functions
         $scope.actionSelectAnswer = function (animal) {
+            //Check if the game has finished or is not yet started
+            if(currentQuestion === undefined){
+                return;
+            }
+
             $scope.classRightAnimal = "";
             $scope.classLeftAnimal = "";
 
@@ -96,13 +101,15 @@ angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial
         }
 
         var selectNextQuestion = function () {
-            //Display final score if there are no more questions
-            if($scope.questionIndex >= $scope.numberOfQuestions){
-                showDialogFinalScore();
-            }
-
             //Select from array
             currentQuestion = selectedQuestions[$scope.questionIndex];
+
+            //Display final score if there are no more questions
+            if(currentQuestion === undefined){
+                showDialogFinalScore();
+                return;
+            }
+
 
             //Set the animals
             $scope.classLeftAnimal = "leftAnimal " + buildClassStringForAnimal(currentQuestion.leftAnimal);
