@@ -20,153 +20,57 @@
 
 'use strict';
 
-angular.module('AnimalsAndColorsApp.game', ['ngRoute', 'ngResource', 'ngMaterial'])
+angular.module('AnimalsAndColorsApp.practice', ['ngRoute', 'ngResource', 'ngMaterial', 'AnimalsAndColorsApp.gameService'])
     // Add route configuration for module
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/practice', {
-                templateUrl: 'practice/practice.html',
+                templateUrl: 'shared/gameBoard.html',
                 controller: 'PracticeCtrl'
             });
     }])
 
     // Add controllers
-    .controller('PracticeCtrl', ['$scope', '$resource', '$timeout', '$mdDialog', '$location',
-        function ($scope, $resource, $timeout, $mdDialog, $location) {
-        // Scope variables
-        $scope.classRightAnimal = "";
-        $scope.classLeftAnimal = "";
-        $scope.score = 0;
-        $scope.questionIndex = 0;
-        $scope.numberOfQuestions = 10;
+    .controller('PracticeCtrl', ['$scope', '$timeout', '$mdDialog', '$location', 'gameService',
+        function ($scope, $timeout, $mdDialog, $location, gameService) {
 
-        // variables
-        var allQuestions;
-        var selectedQuestions;
-        var currentQuestion;
+            //Callback functions
+            var showDialogCorrectAnswer = function () {
+                $mdDialog.show({
+                    templateUrl: 'practice/answerDialogCorrect.tmpl.html',
+                    controller: 'AnswerDialogCtrl',
+                    locals: {answerClass: $scope.gameState.classAnswerAnimal}
+                }).finally(function () {
+                    $timeout(gameService.nextQuestion, 100);
+                });
+            };
 
-        //Scope functions
-        $scope.actionSelectAnswer = function (animal) {
-            //Check if the game has finished or is not yet started
-            if(currentQuestion === undefined){
-                return;
-            }
+            var showDialogWrongAnswer = function () {
+                $mdDialog.show({
+                    templateUrl: 'practice/answerDialogWrong.tmpl.html',
+                    controller: 'AnswerDialogCtrl',
+                    locals: {answerClass: $scope.gameState.classAnswerAnimal}
+                }).finally(function () {
+                    $timeout(gameService.nextQuestion, 100);
+                });
+            };
 
-            $scope.classRightAnimal = "";
-            $scope.classLeftAnimal = "";
+            var showDialogFinalScore = function () {
+                $mdDialog.show({
+                    templateUrl: 'practice/finalScoreDialog.tmpl.html',
+                    controller: 'FinalScoreDialogCtrl',
+                    locals: {score: $scope.gameState.score}
+                }).finally(function () {
+                    $location.path('/')
+                });
+            };
 
-            if (animal === currentQuestion.answer.type) {
-                $scope.score++;
-                showDialogCorrectAnswer();
-            } else {
-                showDialogWrongAnswer();
-            }
+            //Configure
+            $scope.gameState = gameService.configure(showDialogCorrectAnswer, showDialogWrongAnswer, showDialogFinalScore);
 
-        }
-
-
-        //functions
-        var startANewGame = function () {
-            //Clear the current animals
-            $scope.classRightAnimal = "";
-            $scope.classLeftAnimal = "";
-
-            //Select random questions
-            selectedQuestions = selectRandomQuestions(allQuestions, $scope.numberOfQuestions);
-
-            //Reset the questionIndex
-            $scope.questionIndex = 0;
-
-            //Reset the score
-            $scope.score = 0;
-
-            //Select the next question
-            selectNextQuestion();
-
-
-        }
-
-        var selectRandomQuestions = function (allQuestions, numberOfQuestions) {
-            //Use lodash to add 'n' questions to a new array
-            var result = _.times(numberOfQuestions, function (n) {
-
-                //Select a random index from the complete question list
-                var randomElementIndex = Math.floor(Math.random() * allQuestions.length);
-
-                //Return the question at the selected index
-                return allQuestions[randomElementIndex];
-            })
-
-            return result;
-        }
-
-        var selectNextQuestion = function () {
-            //Select from array
-            currentQuestion = selectedQuestions[$scope.questionIndex];
-
-            //Display final score if there are no more questions
-            if(currentQuestion === undefined){
-                showDialogFinalScore();
-                return;
-            }
-
-
-            //Set the animals
-            $scope.classLeftAnimal = "leftAnimal " + buildClassStringForAnimal(currentQuestion.leftAnimal);
-            $scope.classRightAnimal = "rightAnimal " + buildClassStringForAnimal(currentQuestion.rightAnimal);
-
-            //Increment the questionIndex
-            $scope.questionIndex++;
-        }
-
-        var buildClassStringForAnimal = function (animal) {
-            return animal.type + animal.color.charAt(0).toUpperCase() + animal.color.substr(1).toLowerCase();
-        }
-
-        var showDialogCorrectAnswer = function () {
-            $mdDialog.show({
-                templateUrl: 'practice/answerDialogCorrect.tmpl.html',
-                controller: 'AnswerDialogCtrl',
-                locals: {answerClass: buildClassStringForAnimal(currentQuestion.answer)}
-            }).finally(function () {
-                $timeout(selectNextQuestion, 100);
-            });
-        }
-
-        var showDialogWrongAnswer = function () {
-            $mdDialog.show({
-                templateUrl: 'practice/answerDialogWrong.tmpl.html',
-                controller: 'AnswerDialogCtrl',
-                locals: {answerClass: buildClassStringForAnimal(currentQuestion.answer)}
-            }).finally(function () {
-                $timeout(selectNextQuestion, 100);
-            });
-        }
-
-        var showDialogFinalScore = function () {
-            $mdDialog.show({
-                templateUrl: 'practice/finalScoreDialog.tmpl.html',
-                controller: 'FinalScoreDialogCtrl',
-                locals: {score: $scope.score}
-            }).finally(function () {
-                $location.path('/')
-            });
-        }
-
-
-        //Initialize
-        //Get all questions from a JSON file
-        $resource('resources/questions.json').query().$promise.then(function (result) {
-            // Store for future use
-            allQuestions = result;
-
-            //Start the practice !
-            startANewGame();
-
-        });
-
-
-    }])
+            //Start
+            gameService.start();
+        }])
     .controller('AnswerDialogCtrl', ['$scope', '$mdDialog', 'answerClass', function ($scope, $mdDialog, answerClass) {
         // Assigned from construction <code>locals</code> options...
         $scope.answerClass = answerClass;

@@ -20,20 +20,20 @@
 
 'use strict';
 
-angular.module('AnimalsAndColorsApp', [
-    'ngRoute',
-    'ngAnimate',
-    'ngMaterial',
-    'AnimalsAndColorsApp.practice',
-    'AnimalsAndColorsApp.title',
-    'AnimalsAndColorsApp.howto',
-    'AnimalsAndColorsApp.play',
-    'AnimalsAndColorsApp.gameService'
-
-])
-    // Add default route configuration
+angular.module('AnimalsAndColorsApp.play', ['ngRoute'])
+    // Add route configuration for module
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
-            .otherwise({redirectTo: '/title'});
+            .when('/play', {
+                templateUrl: 'shared/gameBoard.html',
+                controller: 'PlayCtrl'
+            });
     }])
-;
+
+    // Add controllers
+    .controller('PlayCtrl', ['$scope','gameService',
+        function ($scope,gameService) {
+            $scope.gameState = gameService.gameState;
+
+        }]);
+
