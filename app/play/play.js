@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('AnimalsAndColorsApp.play', ['ngRoute'])
+angular.module('AnimalsAndColorsApp.play', ['ngRoute', 'ngMaterial'])
     // Add route configuration for module
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
@@ -31,9 +31,85 @@ angular.module('AnimalsAndColorsApp.play', ['ngRoute'])
     }])
 
     // Add controllers
-    .controller('PlayCtrl', ['$scope','gameService',
-        function ($scope,gameService) {
-            $scope.gameState = gameService.gameState;
+    .controller('PlayCtrl', ['$scope','$location','$timeout', '$mdDialog', 'gameService',
+        function ($scope, $location,$timeout, $mdDialog, gameService) {
+            //Variables
+            var opponentAnswerPromise;
 
-        }]);
+            //Callbacks
+            function correctAnswer(byPlayer) {
+                var templateUrl;
+                if (byPlayer) {
+                    //Player answered correct
+                    templateUrl = 'play/answerDialogCorrect.tmpl.html';
+
+                } else {
+                    //Opponent answered
+                    templateUrl = 'play/answerDialogOpponent.tmpl.html';
+                }
+
+                $mdDialog.show({
+                    templateUrl: templateUrl,
+                    controller: 'DialogCtrl'
+                }).finally(function () {
+                    gameService.nextQuestion();
+                });
+            }
+
+            function wrongAnswer() {
+                $mdDialog.show({
+                    templateUrl: 'play/answerDialogWrong.tmpl.html',
+                    controller: 'DialogCtrl'
+                }).finally(function () {
+                    gameService.nextQuestion();
+                });
+            }
+
+            function finalScore() {
+                var templateUrl;
+                if ($scope.gameState.score === $scope.gameState.cpuScore) {
+                    templateUrl = 'play/drawDialog.tmpl.html';
+                } else if ($scope.gameState.score > $scope.gameState.cpuScore) {
+                    templateUrl = 'play/winnerDialog.tmpl.html'
+                } else {
+                    templateUrl = 'play/loserDialog.tmpl.html'
+                }
+                $mdDialog.show({
+                    templateUrl: templateUrl,
+                    controller: 'WinLoseDialogCtrl'
+                }).finally(function () {
+                    $location.path('/')
+                });
+            }
+
+            function opponentAnswer() {
+                $scope.gameState.actionSelectAnswer("cpu",false);
+            }
+            function opponent() {
+                //If the opponent still hasn't answered the previous question
+                //Cancel the answer request
+                if(opponentAnswerPromise !== undefined) {
+                    $timeout.cancel(opponentAnswerPromise);
+                }
+                var timeToWait = Math.floor(Math.random() * 2500) + 2000;
+                opponentAnswerPromise = $timeout(opponentAnswer,timeToWait);
+            }
+
+            //Configure
+            $scope.gameState = gameService.configure(correctAnswer, wrongAnswer, finalScore, opponent);
+
+            //Start
+            gameService.start();
+
+        }])
+    //Dialog controller
+    .controller('DialogCtrl', ['$timeout', '$mdDialog', function ($timeout, $mdDialog) {
+        $timeout($mdDialog.hide, 2000)
+    }])
+    .controller('WinLoseDialogCtrl', ['$scope', '$mdDialog', function ($scope, $mdDialog) {
+        $scope.closeDialog = function () {
+            $mdDialog.hide();
+        };
+    }]);
+;
 

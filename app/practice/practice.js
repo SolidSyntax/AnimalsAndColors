@@ -72,7 +72,6 @@ angular.module('AnimalsAndColorsApp.practice', ['ngRoute', 'ngResource', 'ngMate
             gameService.start();
         }])
     .controller('AnswerDialogCtrl', ['$scope', '$mdDialog', 'answerClass', function ($scope, $mdDialog, answerClass) {
-        // Assigned from construction <code>locals</code> options...
         $scope.answerClass = answerClass;
 
         $scope.closeDialog = function () {

@@ -21,11 +21,12 @@
 'use strict';
 
 angular.module('AnimalsAndColorsApp.gameService', [])
-    .factory('gameService', ['$resource','$timeout', function gameFactory($resource,$timeout) {
+    .factory('gameService', ['$resource', '$timeout', function gameFactory($resource, $timeout) {
         //Internal variables
         var allQuestions;
         var selectedQuestions;
         var currentQuestion;
+        var currentQuestionAnswered;
         var correctAnswerCallback;
         var wrongAnswerCallback;
         var endOfGameCallback;
@@ -54,14 +55,29 @@ angular.module('AnimalsAndColorsApp.gameService', [])
                 return;
             }
 
+            //Check if the question has already been answered (CPU might answer after the player)
+            if (currentQuestionAnswered) {
+                return;
+            }
+            currentQuestionAnswered = true;
+
             gameState.classRightAnimal = "";
             gameState.classLeftAnimal = "";
 
-            if (animal === currentQuestion.answer.type) {
-                gameState.score++;
-                correctAnswerCallback();
+
+            if (byPlayer) {
+                //Answer by player
+                if (animal === currentQuestion.answer.type) {
+                    gameState.score++;
+                    correctAnswerCallback(true);
+                } else {
+                    gameState.cpuScore++;
+                    wrongAnswerCallback();
+                }
             } else {
-                wrongAnswerCallback();
+                //Answer by opponent(cpu)
+                gameState.cpuScore++;
+                correctAnswerCallback(false);
             }
 
         };
@@ -79,6 +95,7 @@ angular.module('AnimalsAndColorsApp.gameService', [])
 
             //Reset the score
             gameState.score = 0;
+            gameState.cpuScore = 0;
 
             //Select the next question
             $timeout(nextQuestion, 1000);
@@ -94,7 +111,7 @@ angular.module('AnimalsAndColorsApp.gameService', [])
             score: 0,
             cpuScore: 0,
             questionIndex: 0,
-            numberOfQuestions: 10,
+            numberOfQuestions: 2,
             actionSelectAnswer: actionSelectAnswer
         };
 
@@ -125,6 +142,8 @@ angular.module('AnimalsAndColorsApp.gameService', [])
                 return;
             }
 
+            //Indicate that this question has not yet been answered
+            currentQuestionAnswered = false;
 
             //Set the animals
             gameState.classLeftAnimal = "leftAnimal " + buildClassStringForAnimal(currentQuestion.leftAnimal);
@@ -133,6 +152,11 @@ angular.module('AnimalsAndColorsApp.gameService', [])
 
             //Increment the questionIndex
             gameState.questionIndex++;
+
+            //Notify the opponent
+            if (opponentCallback !== undefined) {
+                opponentCallback();
+            }
 
         };
 
