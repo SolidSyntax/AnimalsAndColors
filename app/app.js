@@ -24,9 +24,11 @@ angular.module('AnimalsAndColorsApp', [
     'ngRoute',
     'ngAnimate',
     'ngMaterial',
-    'AnimalsAndColorsApp.game',
+    'AnimalsAndColorsApp.practice',
     'AnimalsAndColorsApp.title',
     'AnimalsAndColorsApp.howto',
+    'AnimalsAndColorsApp.play',
+    'AnimalsAndColorsApp.gameService'
 
 ])
     // Add default route configuration
