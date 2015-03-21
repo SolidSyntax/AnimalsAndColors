@@ -111,7 +111,7 @@ angular.module('AnimalsAndColorsApp.gameService', [])
             score: 0,
             cpuScore: 0,
             questionIndex: 0,
-            numberOfQuestions: 2,
+            numberOfQuestions: 10,
             actionSelectAnswer: actionSelectAnswer
         };
 
