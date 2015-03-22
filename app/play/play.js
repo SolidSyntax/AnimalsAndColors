@@ -91,7 +91,7 @@ angular.module('AnimalsAndColorsApp.play', ['ngRoute', 'ngMaterial'])
                 if(opponentAnswerPromise !== undefined) {
                     $timeout.cancel(opponentAnswerPromise);
                 }
-                var timeToWait = Math.floor(Math.random() * 2500) + 2000;
+                var timeToWait = Math.floor(Math.random() * 3000) + 2500;
                 opponentAnswerPromise = $timeout(opponentAnswer,timeToWait);
             }
 
