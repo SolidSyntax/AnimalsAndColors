@@ -83,6 +83,11 @@ angular.module('AnimalsAndColorsApp.play', ['ngRoute', 'ngMaterial'])
             }
 
             function opponentAnswer() {
+                //Check location, the game might no longer be in 'play' mode
+                var path = $location.path()
+                if(path !== "/play"){
+                    return;
+                }
                 $scope.gameState.actionSelectAnswer("cpu",false);
             }
             function opponent() {
