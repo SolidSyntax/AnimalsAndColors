@@ -21,6 +21,7 @@
 'use strict';
 
 angular.module('AnimalsAndColorsApp', [
+    'ngTouch',
     'ngRoute',
     'ngAnimate',
     'ngMaterial',

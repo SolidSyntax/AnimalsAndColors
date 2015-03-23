@@ -11,6 +11,7 @@
     "angular-animate": "latest",
     "animate-css": "latest",
     "angular-material": "latest",
-    "lodash":"latest"
+    "lodash": "latest",
+    "angular-touch": "latest"
   }
 }
