@@ -4,7 +4,13 @@ Used as a demo-project for AngularJS with the material-design and animation exte
 
 The game itself is in Dutch, the code is in English.
 
-To run the project:  
+### To run the project:
+```sh
 npm install  
-npm start  
-navigate to http://localhost:8000/app/index.html  
+npm start
+```
+navigate to http://localhost:8000/app/index.html
+
+### Live demo
+http://solidsyntax.be/playground/DiertjesEnKleurtjes
+
