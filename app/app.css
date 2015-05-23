@@ -131,6 +131,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     display: inline-block;
     height: 100%;
     width: 15vmin;
+    height: 20vh;
 }
 
 .howToAnimal:hover{
